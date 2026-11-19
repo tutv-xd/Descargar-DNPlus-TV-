@@ -259,17 +259,9 @@
             </div>
         </div>
 
-        <!-- Pie de Página Discreto con Botón de Copiar Código -->
-        <footer class="bg-sky-100/90 border-t border-sky-200 px-4 py-3 flex items-center justify-between gap-2 text-[11px] text-black">
+        <!-- Pie de Página Limpio -->
+        <footer class="bg-sky-100/90 border-t border-sky-200 px-4 py-3 flex items-center justify-center text-[11px] text-black">
             <span class="font-bold truncate">DNPlus TV • Canal 5</span>
-            <button
-                type="button"
-                onclick="copyFullHtmlSource()"
-                class="bg-white hover:bg-black hover:text-white text-black border border-black/20 font-extrabold px-3 py-1 rounded-xl flex items-center gap-1.5 transition cursor-pointer shrink-0 shadow-sm"
-            >
-                <i class="fa-regular fa-copy text-[#dc2626]"></i>
-                <span>Copiar Código HTML</span>
-            </button>
         </footer>
     </main>
 
@@ -368,44 +360,6 @@
             if (!modal) return;
             modal.classList.add('hidden');
             modal.classList.remove('flex');
-        }
-
-        function copyFullHtmlSource() {
-            try {
-                const docClone = document.documentElement.cloneNode(true);
-                const modal = docClone.querySelector('#zoomModal');
-                if (modal) {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('flex');
-                    const content = modal.querySelector('#zoomContent');
-                    if (content) content.innerHTML = '';
-                }
-                const toast = docClone.querySelector('#copyToast');
-                if (toast) {
-                    toast.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
-                }
-
-                const fullHtml = '<!DOCTYPE html>\n' + docClone.outerHTML;
-                const textarea = document.createElement('textarea');
-                textarea.value = fullHtml;
-                textarea.setAttribute('readonly', '');
-                textarea.style.position = 'fixed';
-                textarea.style.top = '-9999px';
-                document.body.appendChild(textarea);
-                textarea.select();
-                textarea.setSelectionRange(0, textarea.value.length);
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-
-                const liveToast = document.getElementById('copyToast');
-                if (liveToast) {
-                    liveToast.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
-                    clearTimeout(window.__toastTimer);
-                    window.__toastTimer = setTimeout(() => {
-                        liveToast.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
-                    }, 2600);
-                }
-            } catch (e) {}
         }
     </script>
 </body>
